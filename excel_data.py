@@ -60,7 +60,7 @@ class ExcelFiles():
 
 	def transferSalary(self):
 
-		min_row = ExcelFigures().min_row
+		min_row = ExcelFigures().min_row + 4
 		while min_row <= ExcelFigures().max_row:
 		# 'While' allows going one row at a time
 			salaryList = []
@@ -94,7 +94,7 @@ class ExcelFiles():
 					bookSheet['M%s' % tax_row] = salaryList[index]
 					tax_row += 1
 
-			book.save(filename='/home/richard/Documents/DadTx/repo/%s.xlsx' % self.newFileNames[min_row - 6])
+			book.save(filename='/home/richard/Documents/DadTx/repo/%s.xlsx' % self.newFileNames[min_row - 5])
 			min_row += 1
 
 		
@@ -103,7 +103,7 @@ def main():
 	start = ExcelFiles('/home/richard/Documents/DadTx/static/records.xlsx')
 	start.everybodysFile()
 	start.transferData()
-#  	start.transferSalary()
+	start.transferSalary()
 
     
 main()
