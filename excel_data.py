@@ -2,6 +2,7 @@
 
 import openpyxl
 import shutil
+from openpyxl.drawing.image import Image
 
 """
 I am trying to copy data from
@@ -55,6 +56,8 @@ class ExcelFiles():
 				self.bookSheet = book.active
 				self.bookSheet['D12'] = name
 				self.bookSheet['L14'] = pin
+				img = Image('/home/richard/Documents/DadTx/static/p9_logo.png')
+				self.bookSheet.add_image(img, 'h2')
 				book.save(filename='/home/richard/Documents/DadTx/repo/%s.xlsx' % name)
 				min_row += 1
 
@@ -103,7 +106,7 @@ def main():
 	start = ExcelFiles('/home/richard/Documents/DadTx/static/records.xlsx')
 	start.everybodysFile()
 	start.transferData()
-	start.transferSalary()
+	#start.transferSalary()
 
     
 main()
