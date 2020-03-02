@@ -94,7 +94,7 @@ class ExcelFiles():
 				else:
 					#  the index is odd
 					#  this one goes to the tax column
-					bookSheet['M%s' % tax_row] = salaryList[index]
+					bookSheet['O%s' % tax_row] = salaryList[index]
 					tax_row += 1
 
 			book.save(filename='/home/richard/Documents/DadTx/repo/%s.xlsx' % self.newFileNames[min_row - 5])
