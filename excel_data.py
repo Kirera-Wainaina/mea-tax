@@ -95,6 +95,13 @@ class ExcelFiles():
 					#  the index is odd
 					#  this one goes to the tax column
 					bookSheet['O%s' % tax_row] = salaryList[index]
+					if salaryList[index] == '-' or salaryList[index] == None:
+						taxCharge = 0 + 1408
+						bookSheet['M%s' % tax_row] = taxCharge
+					else:
+						taxCharge = float(salaryList[index]) + 1408
+						bookSheet['M%s' % tax_row] = taxCharge
+					print(taxCharge)
 					tax_row += 1
 
 			book.save(filename='/home/richard/Documents/DadTx/repo/%s.xlsx' % self.newFileNames[min_row - 5])
