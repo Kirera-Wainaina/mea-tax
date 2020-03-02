@@ -106,7 +106,7 @@ def main():
 	start = ExcelFiles('/home/richard/Documents/DadTx/static/records.xlsx')
 	start.everybodysFile()
 	start.transferData()
-	#start.transferSalary()
+	start.transferSalary()
 
     
 main()
