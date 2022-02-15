@@ -17,7 +17,7 @@ a copy of a p9 template
 
 class ExcelFigures():
 
-	def __init__(self, min_col=1, max_col=33, min_row=1, max_row=466):
+	def __init__(self, min_col=1, max_col=33, min_row=1, max_row=18):
 		self.min_col = min_col
 		self.max_col = max_col
 		self.min_row = min_row
@@ -90,15 +90,33 @@ class ExcelFiles():
 				if index % 2 == 0:
 				#  if divisible by 2 then that is salary
 				#  transfer the salary to the persons template
-					bookSheet['C%s' % salary_row] = salaryList[index]
+					if salaryList[index] == "-" or salaryList[index] == 0:
+						# some salaries are dashes in the records file
+						# resulting in a #value! error
+						bookSheet['C%s' % salary_row] = 0
+						# if someone didn't earn a salary then tax(M) and relief(N)
+						# should be 0 for those months
+						bookSheet['M%s' % salary_row] = 0
+						bookSheet['N%s' % salary_row] = 0
+					else:
+						bookSheet['C%s' % salary_row] = salaryList[index]
 					salary_row += 1
 				
 				else:
 					#  the index is odd
-					#  this one goes to the tax column
-					bookSheet['O%s' % tax_row] = salaryList[index]
+					#  this one goes to the PAYE column(O)
+					if salaryList[index] == "-":
+						bookSheet['O%s' % tax_row] = 0
+					else:
+						bookSheet['O%s' % tax_row] = salaryList[index]
+
+					# tax charge column (M)
 					if salaryList[index] == '-' or salaryList[index] == None:
-						taxCharge = 0 + 1408
+					# at this point tax is 0, confirm if salary is 0 as well
+						if bookSheet['C%s' % tax_row].value == 0:
+							taxCharge = 0
+						else:
+							taxCharge = 0 + 1408
 						bookSheet['M%s' % tax_row] = taxCharge
 					else:
 						taxCharge = float(salaryList[index]) + 1408
