@@ -17,7 +17,7 @@ a copy of a p9 template
 
 class ExcelFigures():
 
-	def __init__(self, min_col=1, max_col=33, min_row=1, max_row=18):
+	def __init__(self, min_col=1, max_col=33, min_row=1, max_row=466):
 		self.min_col = min_col
 		self.max_col = max_col
 		self.min_row = min_row
