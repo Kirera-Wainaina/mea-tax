@@ -1,0 +1,16 @@
+#ignore the pycache
+__pycache__
+
+# ignore the repo and repo_pdf
+repo/
+repo_pdf/
+
+# emacs files
+*#
+*swp
+
+# remove the file with the employee records
+static/records*
+
+#venv: the packages are recorded in the requirements folder
+venv/
