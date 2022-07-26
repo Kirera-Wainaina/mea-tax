@@ -116,10 +116,10 @@ class ExcelFiles():
 						if bookSheet['C%s' % tax_row].value == 0:
 							taxCharge = 0
 						else:
-							taxCharge = 0 + 1408
+							taxCharge = 0 + 2400
 						bookSheet['M%s' % tax_row] = taxCharge
 					else:
-						taxCharge = float(salaryList[index]) + 1408
+						taxCharge = float(salaryList[index]) + 2400
 						bookSheet['M%s' % tax_row] = taxCharge
 					tax_row += 1
 
