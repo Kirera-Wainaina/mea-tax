@@ -1,4 +1,6 @@
 import openpyxl
+import os
+import shutil
 
 def open_workbook():
     workbook = openpyxl.load_workbook(filename='./static/records.xlsx')
@@ -16,7 +18,15 @@ def iterate_through_rows(worksheet,
         handle_employee_details(row)
 
 def handle_employee_details(details):
-    pass
+    employee_name = details[1].value
+    tax_file = create_employee_tax_file(employee_name)
+    return True
+
+def create_employee_tax_file(name):
+    template_path = '{cwd}/static/p9.xlsx'.format(cwd=os.getcwd())
+    employee_file_path = '{cwd}/repo/{name}.xlsx'.format(cwd=os.getcwd(), name=name)
+    shutil.copy(template_path, employee_file_path)
+    return employee_file_path
 
 if __name__ == '__main__':
     workbook = open_workbook()
