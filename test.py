@@ -54,9 +54,6 @@ class TestHandleEmployeeDetails(unittest.TestCase):
 
 class TestCreateEmployeeTaxFile(unittest.TestCase):
 
-    def setUp(self):
-        pass
-
     def test_path_isReturned(self):
         path = main.create_employee_tax_file('richard')
         self.assertEqual(path, '{cwd}/repo/{name}.xlsx'.format(
