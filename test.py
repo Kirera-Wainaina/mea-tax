@@ -43,5 +43,13 @@ class TestIterateThroughRows(unittest.TestCase):
         self.worksheet.iter_rows.assert_called_with(min_row=min_row, 
             max_row=max_row, min_col=min_col, max_col=max_col)
 
+class TestHandleEmployeeDetails(unittest.TestCase):
+    
+    def setUp(self):
+        self.details = ('a', 'a', 'a')
+
+    def test_returnValue_true(self):
+        self.assertTrue(main.handle_employee_details(self.details))
+
 if __name__ == '__main__':
     unittest.main()
