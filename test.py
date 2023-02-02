@@ -9,7 +9,8 @@ PSEUDOCODE
 import unittest
 from unittest.mock import MagicMock, patch
 import openpyxl
-import main
+import main # main.py
+import os
 
 class TestGetPayeWorksheet(unittest.TestCase):
 
@@ -46,10 +47,21 @@ class TestIterateThroughRows(unittest.TestCase):
 class TestHandleEmployeeDetails(unittest.TestCase):
     
     def setUp(self):
-        self.details = ('a', 'a', 'a')
+        self.details = MagicMock()
 
     def test_returnValue_true(self):
         self.assertTrue(main.handle_employee_details(self.details))
+
+class TestCreateEmployeeTaxFile(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_path_isReturned(self):
+        path = main.create_employee_tax_file('richard')
+        self.assertEqual(path, '{cwd}/{name}.xlsx'.format(
+            cwd=os.getcwd(), name='richard'))
+
 
 if __name__ == '__main__':
     unittest.main()
