@@ -7,7 +7,7 @@ PSEUDOCODE
 '''
 
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 import openpyxl
 import main
 
@@ -16,11 +16,14 @@ class TestGetPayeWorksheet(unittest.TestCase):
     def setUp(self):
         self.workbook = openpyxl.Workbook()
         self.worksheet = self.workbook.create_sheet('PAYE2022')
+        self.sheet = main.get_paye_worksheet(self.workbook)
 
     def test_worksheet_isInstance(self):
-        sheet = main.get_paye_worksheet(self.workbook)
-        self.assertIsInstance(sheet, 
+        self.assertIsInstance(self.sheet, 
             openpyxl.worksheet.worksheet.Worksheet)
+
+    def test_worksheet_name(self):
+        self.assertEqual(self.sheet.title, 'PAYE2022')
 
 class WorkSheet:
 
