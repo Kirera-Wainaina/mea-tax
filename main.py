@@ -19,7 +19,8 @@ def iterate_through_rows(worksheet,
 
 def handle_employee_details(details):
     employee_name = details[1].value
-    tax_file = create_employee_tax_file(employee_name)
+    file_path = create_employee_tax_file(employee_name)
+    
     return True
 
 def create_employee_tax_file(name):
@@ -27,6 +28,15 @@ def create_employee_tax_file(name):
     employee_file_path = '{cwd}/repo/{name}.xlsx'.format(cwd=os.getcwd(), name=name)
     shutil.copy(template_path, employee_file_path)
     return employee_file_path
+
+def load_employee_worksheet(file_path):
+    workbook = openpyxl.load_workbook(file_path)
+    return workbook.active
+    '''
+    open workbook
+    return the worksheet
+    '''
+    pass
 
 if __name__ == '__main__':
     workbook = open_workbook()
