@@ -20,7 +20,11 @@ def iterate_through_rows(worksheet,
 def handle_employee_details(details):
     employee_name = details[1].value
     file_path = create_employee_tax_file(employee_name)
-    p9_sheet = load_employee_worksheet(file_path)
+    employee_workbook = load_employee_workbook(file_path)
+    p9_sheet = employee_workbook.active
+
+    add_employee_name_to_their_worksheet(p9_sheet, employee_name)
+    employee_workbook.save(filename=file_path)
     return True
 
 def create_employee_tax_file(name):
@@ -29,12 +33,12 @@ def create_employee_tax_file(name):
     shutil.copy(template_path, employee_file_path)
     return employee_file_path
 
-def load_employee_worksheet(file_path):
-    workbook = openpyxl.load_workbook(file_path)
-    return workbook.active
+def load_employee_workbook(file_path):
+    return openpyxl.load_workbook(file_path)
 
 def add_employee_name_to_their_worksheet(worksheet, name):
     worksheet['D12'] = name
+    return True
 
 if __name__ == '__main__':
     workbook = open_workbook()
