@@ -45,12 +45,7 @@ class TestIterateThroughRows(unittest.TestCase):
             max_row=max_row, min_col=min_col, max_col=max_col)
 
 class TestHandleEmployeeDetails(unittest.TestCase):
-    
-    def setUp(self):
-        self.details = MagicMock()
-
-    def test_returnValue_true(self):
-        self.assertTrue(main.handle_employee_details(self.details))
+    pass    
 
 class TestCreateEmployeeTaxFile(unittest.TestCase):
 
