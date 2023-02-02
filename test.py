@@ -17,7 +17,7 @@ class TestGetPayeWorksheet(unittest.TestCase):
     def setUp(self):
         self.workbook = openpyxl.Workbook()
         self.worksheet = self.workbook.create_sheet('PAYE2022')
-        self.sheet = main.get_paye_worksheet(self.workbook)
+        self.sheet = main.get_records_worksheet(self.workbook)
 
     def test_worksheet_isInstance(self):
         self.assertIsInstance(self.sheet, 
@@ -59,6 +59,12 @@ class TestCreateEmployeeTaxFile(unittest.TestCase):
         self.assertEqual(path, '{cwd}/repo/{name}.xlsx'.format(
             cwd=os.getcwd(), name='richard'))
 
+class TestAddEmployeeNameToTheirWorksheet(unittest.TestCase):
+
+    def test_name_isAdded(self):
+        mock_worksheet = MagicMock()
+        main.add_employee_name_to_their_worksheet(mock_worksheet, 'john')
+        mock_worksheet.__setitem__.assert_called_with('D12', 'john');
 
 if __name__ == '__main__':
     unittest.main()
