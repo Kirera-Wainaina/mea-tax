@@ -6,7 +6,7 @@ def open_workbook():
     workbook = openpyxl.load_workbook(filename='./static/records.xlsx')
     return workbook
 
-def get_paye_worksheet(workbook):
+def get_records_worksheet(workbook):
     return workbook['PAYE2022']
 
 def iterate_through_rows(worksheet, 
@@ -20,7 +20,7 @@ def iterate_through_rows(worksheet,
 def handle_employee_details(details):
     employee_name = details[1].value
     file_path = create_employee_tax_file(employee_name)
-    
+    p9_sheet = load_employee_worksheet(file_path)
     return True
 
 def create_employee_tax_file(name):
@@ -32,15 +32,13 @@ def create_employee_tax_file(name):
 def load_employee_worksheet(file_path):
     workbook = openpyxl.load_workbook(file_path)
     return workbook.active
-    '''
-    open workbook
-    return the worksheet
-    '''
-    pass
+
+def add_employee_name_to_their_worksheet(worksheet, name):
+    worksheet['D12'] = name
 
 if __name__ == '__main__':
     workbook = open_workbook()
-    worksheet = get_paye_worksheet(workbook)
+    worksheet = get_records_worksheet(workbook)
     iterate_through_rows(
         worksheet=worksheet, min_row=5, max_row=468,
         min_col=1, max_col=28)
