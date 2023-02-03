@@ -26,6 +26,7 @@ def handle_employee_details(details):
 
     add_employee_name_to_their_worksheet(p9_sheet, employee_name)
     add_employee_pin_to_their_worksheet(p9_sheet, details[0].value)
+    add_kra_logo_to_employee_worksheet(p9_sheet)
     employee_workbook.save(filename=file_path)
     return True
 
@@ -48,7 +49,7 @@ def add_employee_pin_to_their_worksheet(worksheet, pin):
 
 def add_kra_logo_to_employee_worksheet(worksheet):
     image = Image('{cwd}/static/p9_logo.png'.format(cwd=os.getcwd()))
-    worksheet.set_image(image, 'H2')
+    worksheet.add_image(image, 'H2')
     return
 
 if __name__ == '__main__':
