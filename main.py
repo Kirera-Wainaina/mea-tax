@@ -1,4 +1,5 @@
 import openpyxl
+from openpyxl.drawing.image import Image
 import os
 import shutil
 
@@ -45,9 +46,17 @@ def add_employee_pin_to_their_worksheet(worksheet, pin):
     worksheet['L14'] = pin
     return
 
+def add_kra_logo_to_employee_worksheet(worksheet):
+    # get image path
+    # use the add_image method to add it
+    image = Image('{cwd}/static/p9_logo.png'.format(cwd=os.getcwd()))
+    worksheet.set_image(image, h2)
+    return
+
 if __name__ == '__main__':
     workbook = open_workbook()
     worksheet = get_records_worksheet(workbook)
     iterate_through_rows(
-        worksheet=worksheet, min_row=5, max_row=468,
+        worksheet=worksheet, min_row=5, max_row=7,
         min_col=1, max_col=28)
+# max-row is 468
