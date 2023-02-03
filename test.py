@@ -73,7 +73,7 @@ class TestAddKraLogoToEmployeeWorksheet(unittest.TestCase):
     def test_image_isAdded(self):
         mock_worksheet = MagicMock()
         main.add_kra_logo_to_employee_worksheet(mock_worksheet)
-        mock_worksheet.add_image.assert_called()
-        
+        mock_worksheet.set_image.assert_called()
+
 if __name__ == '__main__':
     unittest.main()
