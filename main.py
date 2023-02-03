@@ -47,10 +47,8 @@ def add_employee_pin_to_their_worksheet(worksheet, pin):
     return
 
 def add_kra_logo_to_employee_worksheet(worksheet):
-    # get image path
-    # use the add_image method to add it
     image = Image('{cwd}/static/p9_logo.png'.format(cwd=os.getcwd()))
-    worksheet.set_image(image, h2)
+    worksheet.set_image(image, 'H2')
     return
 
 if __name__ == '__main__':
