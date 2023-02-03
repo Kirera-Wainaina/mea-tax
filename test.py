@@ -67,6 +67,13 @@ class TestAddEmployeePinToTheirWorksheet(unittest.TestCase):
         mock_worksheet = MagicMock()
         main.add_employee_pin_to_their_worksheet(mock_worksheet, 'A0001')
         mock_worksheet.__setitem__.assert_called_with('L14', 'A0001')
+
+class TestAddKraLogoToEmployeeWorksheet(unittest.TestCase):
+
+    def test_image_isAdded(self):
+        mock_worksheet = MagicMock()
+        main.add_kra_logo_to_employee_worksheet(mock_worksheet)
+        mock_worksheet.add_image.assert_called()
         
 if __name__ == '__main__':
     unittest.main()
