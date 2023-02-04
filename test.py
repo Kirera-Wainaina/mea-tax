@@ -87,5 +87,12 @@ class TestAddFinancialDetailsToEmployeeWorksheet(unittest.TestCase):
             self.mock_details)
         self.mock_details.__getitem__.assert_called()
 
+class TestAddSalaryToEmployeeWorksheet(unittest.TestCase):
+
+    def test_worksheet_setsValue(self):
+        mock_worksheet = MagicMock()
+        main.add_salary_to_employee_worksheet(mock_worksheet, 2, 1500)
+        mock_worksheet.__setitem__.assert_called_with('C27', 1500)
+
 if __name__ == '__main__':
     unittest.main()
