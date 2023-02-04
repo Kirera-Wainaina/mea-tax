@@ -35,7 +35,8 @@ def handle_employee_details(details):
 
 def create_employee_tax_file(name):
     template_path = '{cwd}/static/p9.xlsx'.format(cwd=os.getcwd())
-    employee_file_path = '{cwd}/repo/{name}.xlsx'.format(cwd=os.getcwd(), name=name)
+    employee_file_path = '{cwd}/repo/{name}.xlsx'
+        .format(cwd=os.getcwd(), name=name)
     shutil.copy(template_path, employee_file_path)
     return employee_file_path
 
@@ -56,9 +57,21 @@ def add_kra_logo_to_employee_worksheet(worksheet):
     return
 
 def add_financial_details_to_employee_worksheet(worksheet, details):
-    # iterate from the 3rd value to the 26
+    # remove name and pin from details
+    # remain with salary and paye from Jan to Dec
     financial_details = details[2:27]
+    for index, item in enumerate(financial_details):
+        if index % 2 == 0:
+            add_salary_to_employee_worksheet(worksheet, index, item)
+        else:
+            add_tax_to_employee_worksheet(worksheet, index, item)
     return
+
+def add_salary_to_employee_worksheet(index, item):
+    pass
+
+def add_tax_to_employee_worksheet(index, item):
+    pass
 
 if __name__ == '__main__':
     workbook = open_workbook()
