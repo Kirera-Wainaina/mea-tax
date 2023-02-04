@@ -28,7 +28,6 @@ def handle_employee_details(details):
     add_employee_name_to_their_worksheet(p9_sheet, employee_name)
     add_employee_pin_to_their_worksheet(p9_sheet, details[0].value)
     add_kra_logo_to_employee_worksheet(p9_sheet)
-
     add_financial_details_to_employee_worksheet(p9_sheet, details)
 
     employee_workbook.save(filename=file_path)
@@ -60,7 +59,7 @@ def add_kra_logo_to_employee_worksheet(worksheet):
 def add_financial_details_to_employee_worksheet(worksheet, details):
     # remove name and pin from details
     # remain with salary and paye from Jan to Dec
-    financial_details = details[2:27]
+    financial_details = details[2:26]
     for index, item in enumerate(financial_details):
         if index % 2 == 0:
             add_salary_to_employee_worksheet(worksheet, index, item.value)
@@ -71,6 +70,7 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
 def add_salary_to_employee_worksheet(worksheet, index, item):
     salary_column, start_row = 'C', 26
     current_row = math.floor(start_row + index/2)
+    #print(item)
     if item == '-':
         item = 0
     worksheet['{column}{row}'.format(column=salary_column, row=current_row)] = item
