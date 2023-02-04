@@ -27,6 +27,9 @@ def handle_employee_details(details):
     add_employee_name_to_their_worksheet(p9_sheet, employee_name)
     add_employee_pin_to_their_worksheet(p9_sheet, details[0].value)
     add_kra_logo_to_employee_worksheet(p9_sheet)
+
+    add_financial_details_to_employee_worksheet(p9_sheet, details)
+
     employee_workbook.save(filename=file_path)
     return True
 
@@ -50,6 +53,11 @@ def add_employee_pin_to_their_worksheet(worksheet, pin):
 def add_kra_logo_to_employee_worksheet(worksheet):
     image = Image('{cwd}/static/p9_logo.png'.format(cwd=os.getcwd()))
     worksheet.add_image(image, 'H2')
+    return
+
+def add_financial_details_to_employee_worksheet(worksheet, details):
+    # iterate from the 3rd value to the 26
+    financial_details = details[2:27]
     return
 
 if __name__ == '__main__':
