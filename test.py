@@ -115,7 +115,16 @@ class TestAddTaxToEmployeeWorksheet(unittest.TestCase):
 
     def test_worksheet_getsZeroIfDash(self):
         main.add_tax_to_employee_worksheet(self.mock_worksheet, 3, '-')
-        self.mock_worksheet.__setitem__.assert_called_with('M27', 0)
+        self.mock_worksheet.__setitem__.assert_any_call('M27', 0)
+
+class TestAdjustFinalMonthlyTaxOnWorksheet(unittest.TestCase):
+
+    def setUp(self):
+        self.mock_worksheet = MagicMock()
+
+    def test_monthlyTax_lessThanZero(self):
+        main.adjust_final_monthly_tax_on_worksheet(self.mock_worksheet, 26, 1300)
+        self.mock_worksheet.__setitem__.assert_called_with('O26', 0)
 
 if __name__ == '__main__':
     unittest.main()
