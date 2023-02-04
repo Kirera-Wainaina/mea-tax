@@ -70,19 +70,26 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
 
 def add_salary_to_employee_worksheet(worksheet, index, item):
     salary_column, start_row = 'C', 26
+    current_row = math.floor(start_row + index/2)
     if item == '-':
         item = 0
-    worksheet['{column}{row}'.format(column=salary_column, 
-                                    row=math.floor(start_row + index/2))] = item
+    worksheet['{column}{row}'.format(column=salary_column, row=current_row)] = item
     return
 
 def add_tax_to_employee_worksheet(worksheet, index, item):
     tax_column, start_row = 'M', 26
+    current_row = math.floor(start_row + (index-1)/2)
     if item == '-':
         item = 0
-    worksheet['{column}{row}'.format(column=tax_column, 
-                                    row=math.floor(start_row + (index-1)/2))] = item
-    return 
+    worksheet['{column}{row}'.format(column=tax_column, row=current_row)] = item
+    adjust_final_monthly_tax_on_worksheet(worksheet, current_row, item)
+    return
+
+def adjust_final_monthly_tax_on_worksheet(worksheet, row, item):
+    paye_column, tax_due = 'O', item - 2400
+    if tax_due < 0:
+        worksheet['{column}{row}'.format(column=paye_column, row=row)] = 0
+   return
 
 if __name__ == '__main__':
     workbook = open_workbook()
