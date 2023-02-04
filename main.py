@@ -63,9 +63,9 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
     financial_details = details[2:27]
     for index, item in enumerate(financial_details):
         if index % 2 == 0:
-            add_salary_to_employee_worksheet(worksheet, index, item)
+            add_salary_to_employee_worksheet(worksheet, index, item.value)
         else:
-            add_tax_to_employee_worksheet(worksheet, index, item)
+            add_tax_to_employee_worksheet(worksheet, index, item.value)
     return
 
 def add_salary_to_employee_worksheet(worksheet, index, item):
@@ -81,6 +81,6 @@ if __name__ == '__main__':
     workbook = open_workbook()
     worksheet = get_records_worksheet(workbook)
     iterate_through_rows(
-        worksheet=worksheet, min_row=5, max_row=7,
+        worksheet=worksheet, min_row=17, max_row=20,
         min_col=1, max_col=28)
 # max-row is 468
