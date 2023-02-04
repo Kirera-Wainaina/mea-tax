@@ -75,5 +75,17 @@ class TestAddKraLogoToEmployeeWorksheet(unittest.TestCase):
         main.add_kra_logo_to_employee_worksheet(mock_worksheet)
         mock_worksheet.add_image.assert_called()
 
+class TestAddFinancialDetailsToEmployeeWorksheet(unittest.TestCase):
+
+    def setUp(self):
+        self.mock_details = MagicMock()
+        self.mock_worksheet = MagicMock()
+
+    def test_financialDetailsVariable_isCreated(self):
+        mock_details = MagicMock()
+        main.add_financial_details_to_employee_worksheet(self.mock_worksheet, 
+            self.mock_details)
+        self.mock_details.__getitem__.assert_called()
+
 if __name__ == '__main__':
     unittest.main()
