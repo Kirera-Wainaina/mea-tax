@@ -100,6 +100,18 @@ class TestAddSalaryToEmployeeWorksheet(unittest.TestCase):
         main.add_salary_to_employee_worksheet(self.mock_worksheet, 4, '-')
         self.mock_worksheet.__setitem__.assert_called_with('C28', 0)
 
+    def test_worksheet_addsZeroIfZero(self):
+        main.add_salary_to_employee_worksheet(self.mock_worksheet, 6, 0)
+        self.mock_worksheet.__setitem__.assert_called_with('C29', 0)
+
+class TestAddTaxToEmployeeWorksheet(unittest.TestCase):
+    
+    def setUp(self):
+        self.mock_worksheet = MagicMock()
+
+    def test_worksheet_setsValue(self):
+        main.add_tax_to_employee_worksheet(self.mock_worksheet, 1, 2600)
+        self.mock_worksheet.__setitem__.assert_called_with('M26', 2600)
 
 if __name__ == '__main__':
     unittest.main()
