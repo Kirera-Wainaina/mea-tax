@@ -2,6 +2,7 @@ import openpyxl
 from openpyxl.drawing.image import Image
 import os
 import shutil
+import math
 
 def open_workbook():
     workbook = openpyxl.load_workbook(filename='./static/records.xlsx')
@@ -35,8 +36,8 @@ def handle_employee_details(details):
 
 def create_employee_tax_file(name):
     template_path = '{cwd}/static/p9.xlsx'.format(cwd=os.getcwd())
-    employee_file_path = '{cwd}/repo/{name}.xlsx'
-        .format(cwd=os.getcwd(), name=name)
+    employee_file_path = '{cwd}/repo/{name}.xlsx'.format(
+        cwd=os.getcwd(), name=name)
     shutil.copy(template_path, employee_file_path)
     return employee_file_path
 
@@ -67,10 +68,13 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
             add_tax_to_employee_worksheet(worksheet, index, item)
     return
 
-def add_salary_to_employee_worksheet(index, item):
-    pass
+def add_salary_to_employee_worksheet(worksheet, index, item):
+    salary_column, start_row = 'C', 26
+    worksheet['{column}{row}'.format(column=salary_column, 
+                                    row=math.floor(start_row+index/2))] = item
+    return
 
-def add_tax_to_employee_worksheet(index, item):
+def add_tax_to_employee_worksheet(worksheet, index, item):
     pass
 
 if __name__ == '__main__':
