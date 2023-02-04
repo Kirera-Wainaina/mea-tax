@@ -78,8 +78,8 @@ def add_salary_to_employee_worksheet(worksheet, index, item):
 
 def add_tax_to_employee_worksheet(worksheet, index, item):
     tax_column, start_row = 'M', 26
-    if item == '-':
-        item = 0
+    if item == '-' or item < 2400:
+        item = 2400
     worksheet['{column}{row}'.format(column=tax_column, 
                                     row=math.floor(start_row + (index-1)/2))] = item
     return 
