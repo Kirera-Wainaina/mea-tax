@@ -73,11 +73,14 @@ def add_salary_to_employee_worksheet(worksheet, index, item):
     if item == '-':
         item = 0
     worksheet['{column}{row}'.format(column=salary_column, 
-                                    row=math.floor(start_row+index/2))] = item
+                                    row=math.floor(start_row + index/2))] = item
     return
 
 def add_tax_to_employee_worksheet(worksheet, index, item):
-    pass
+    tax_column, start_row = 'M', 26
+    worksheet['{column}{row}'.format(column=tax_column, 
+                                    row=math.floor(start_row + (index-1)/2))] = item
+    return 
 
 if __name__ == '__main__':
     workbook = open_workbook()
