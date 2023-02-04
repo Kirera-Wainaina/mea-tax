@@ -70,6 +70,8 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
 
 def add_salary_to_employee_worksheet(worksheet, index, item):
     salary_column, start_row = 'C', 26
+    if item == '-':
+        item = 0
     worksheet['{column}{row}'.format(column=salary_column, 
                                     row=math.floor(start_row+index/2))] = item
     return
