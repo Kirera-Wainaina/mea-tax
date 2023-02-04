@@ -89,10 +89,17 @@ class TestAddFinancialDetailsToEmployeeWorksheet(unittest.TestCase):
 
 class TestAddSalaryToEmployeeWorksheet(unittest.TestCase):
 
+    def setUp(self):
+        self.mock_worksheet = MagicMock()
+
     def test_worksheet_setsValue(self):
-        mock_worksheet = MagicMock()
-        main.add_salary_to_employee_worksheet(mock_worksheet, 2, 1500)
-        mock_worksheet.__setitem__.assert_called_with('C27', 1500)
+        main.add_salary_to_employee_worksheet(self.mock_worksheet, 2, 1500)
+        self.mock_worksheet.__setitem__.assert_called_with('C27', 1500)
+
+    def test_worksheet_getsZeroIfDash(self):
+        main.add_salary_to_employee_worksheet(self.mock_worksheet, 4, '-')
+        self.mock_worksheet.__setitem__.assert_called_with('C28', 0)
+
 
 if __name__ == '__main__':
     unittest.main()
