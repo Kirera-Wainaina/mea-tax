@@ -113,14 +113,9 @@ class TestAddTaxToEmployeeWorksheet(unittest.TestCase):
         main.add_tax_to_employee_worksheet(self.mock_worksheet, 1, 2600)
         self.mock_worksheet.__setitem__.assert_called_with('M26', 2600)
 
-    def test_worksheet_gets2400IfDash(self):
+    def test_worksheet_getsZeroIfDash(self):
         main.add_tax_to_employee_worksheet(self.mock_worksheet, 3, '-')
-        self.mock_worksheet.__setitem__.assert_called_with('M27', 2400)
-
-    def test_worksheet_getsMinumumIfLessThan2400(self):
-        main.add_tax_to_employee_worksheet(self.mock_worksheet, 5, 1300)
-        self.mock_worksheet.__setitem__.assert_called_with('M28', 2400)
-
+        self.mock_worksheet.__setitem__.assert_called_with('M27', 0)
 
 if __name__ == '__main__':
     unittest.main()
