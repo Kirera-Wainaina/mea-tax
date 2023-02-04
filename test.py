@@ -1,15 +1,8 @@
 
-'''
-PSEUDOCODE
-    * Create a copy of the p9 template, give it a person's name
-    * Open the file
-    * Save the data in the file
-'''
-
 import unittest
 from unittest.mock import MagicMock, patch
 import openpyxl
-import main # main.py
+import main
 import os
 
 class TestGetPayeWorksheet(unittest.TestCase):

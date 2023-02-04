@@ -89,7 +89,7 @@ def adjust_final_monthly_tax_on_worksheet(worksheet, row, item):
     paye_column, tax_due = 'O', item - 2400
     if tax_due < 0:
         worksheet['{column}{row}'.format(column=paye_column, row=row)] = 0
-   return
+    return
 
 if __name__ == '__main__':
     workbook = open_workbook()
