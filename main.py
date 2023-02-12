@@ -70,7 +70,7 @@ def add_financial_details_to_employee_worksheet(worksheet, details):
 def add_salary_to_employee_worksheet(worksheet, index, item):
     salary_column, start_row = 'C', 26
     current_row = math.floor(start_row + index/2)
-    if item == '-':
+    if item == '-' or type(item) == type(None):
         item = 0
     worksheet['{column}{row}'.format(column=salary_column, row=current_row)] = item
     return
@@ -78,7 +78,7 @@ def add_salary_to_employee_worksheet(worksheet, index, item):
 def add_tax_to_employee_worksheet(worksheet, index, item):
     tax_column, start_row = 'M', 26
     current_row = math.floor(start_row + (index-1)/2)
-    if item == '-':
+    if item == '-' or type(item) == type(None):
         item = 0
     worksheet['{column}{row}'.format(column=tax_column, row=current_row)] = item
     adjust_final_monthly_tax_on_worksheet(worksheet, current_row, item)
@@ -92,6 +92,7 @@ def adjust_final_monthly_tax_on_worksheet(worksheet, row, item):
 
 def convert_files_to_pdf():
     os.system('libreoffice --headless --convert-to pdf ./repo/*.xlsx --outdir ./repo_pdf')
+    return
 
 if __name__ == '__main__':
     workbook = open_workbook()
