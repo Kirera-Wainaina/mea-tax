@@ -104,8 +104,8 @@ if __name__ == '__main__':
     iterate_through_rows(
         worksheet=worksheet, 
         min_row=5, 
-        max_row=6,
+        max_row=468,
         min_col=1, 
         max_col=28
     )
-    #convert_files_to_pdf()
+    convert_files_to_pdf()
