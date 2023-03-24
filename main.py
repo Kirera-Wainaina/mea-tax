@@ -86,6 +86,8 @@ def add_tax_to_employee_worksheet(worksheet, index, item):
 
 def adjust_chargeable_monthly_tax_on_worksheet(worksheet, row, item):
     chargeable_tax_column, chargeable_tax = 'M', item + 2400
+    if chargeable_tax <= 2400:
+        chargeable_tax = 0
     worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = chargeable_tax
     return
 
