@@ -76,18 +76,17 @@ def add_salary_to_employee_worksheet(worksheet, index, item):
     return
 
 def add_tax_to_employee_worksheet(worksheet, index, item):
-    tax_column, start_row = 'M', 26
+    tax_column, start_row = 'O', 26
     current_row = math.floor(start_row + (index-1)/2)
     if item == '-' or type(item) == type(None):
         item = 0
     worksheet['{column}{row}'.format(column=tax_column, row=current_row)] = item
-    adjust_final_monthly_tax_on_worksheet(worksheet, current_row, item)
+    adjust_chargeable_monthly_tax_on_worksheet(worksheet, current_row, item)
     return
 
-def adjust_final_monthly_tax_on_worksheet(worksheet, row, item):
-    paye_column, tax_due = 'O', item - 2400
-    if tax_due < 0:
-        worksheet['{column}{row}'.format(column=paye_column, row=row)] = 0
+def adjust_chargeable_monthly_tax_on_worksheet(worksheet, row, item):
+    chargeable_tax_column, chargeable_tax = 'M', item + 2400
+    worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = chargeable_tax
     return
 
 def convert_files_to_pdf():
@@ -97,11 +96,12 @@ def convert_files_to_pdf():
 if __name__ == '__main__':
     workbook = open_workbook()
     worksheet = get_records_worksheet(workbook)
+    # max_row = 468
     iterate_through_rows(
         worksheet=worksheet, 
         min_row=5, 
-        max_row=468,
+        max_row=6,
         min_col=1, 
         max_col=28
     )
-    convert_files_to_pdf()
+    #convert_files_to_pdf()
