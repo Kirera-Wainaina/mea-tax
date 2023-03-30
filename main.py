@@ -78,17 +78,28 @@ def add_salary_to_employee_worksheet(worksheet, index, item):
 def add_tax_to_employee_worksheet(worksheet, index, item):
     tax_column, start_row = 'O', 26
     current_row = math.floor(start_row + (index-1)/2)
+
     if item == '-' or type(item) == type(None):
         item = 0
+
     worksheet['{column}{row}'.format(column=tax_column, row=current_row)] = item
     adjust_chargeable_monthly_tax_on_worksheet(worksheet, current_row, item)
     return
 
 def adjust_chargeable_monthly_tax_on_worksheet(worksheet, row, item):
-    chargeable_tax_column, chargeable_tax = 'M', item + 2400
+    relief_column = 'N'
+    chargeable_tax_column = 'M'
+    chargeable_tax = item + 2400
+    salary_value = worksheet['{column}{row}'.format(row=row, column='C')].value
+
     if chargeable_tax <= 2400:
-        chargeable_tax = 2400
-    worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = chargeable_tax
+        if salary_value == 0: # not working in that month
+            worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = 0
+            worksheet['{column}{row}'.format(column=relief_column, row=row)] = 0
+        else: # low salary, not taxable
+            worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = 2400
+    else:
+        worksheet['{column}{row}'.format(column=chargeable_tax_column, row=row)] = chargeable_tax
     return
 
 def convert_files_to_pdf():
