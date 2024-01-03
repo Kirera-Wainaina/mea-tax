@@ -9,7 +9,7 @@ def open_workbook():
     return workbook
 
 def get_records_worksheet(workbook):
-    return workbook['PAYE2022']
+    return workbook['PAYE2023']
 
 def iterate_through_rows(worksheet, 
         min_row, max_row,
@@ -109,11 +109,11 @@ def convert_files_to_pdf():
 if __name__ == '__main__':
     workbook = open_workbook()
     worksheet = get_records_worksheet(workbook)
-    # max_row = 468
+    # max_row = 460
     iterate_through_rows(
         worksheet=worksheet, 
         min_row=5, 
-        max_row=468,
+        max_row=460,
         min_col=1, 
         max_col=28
     )
